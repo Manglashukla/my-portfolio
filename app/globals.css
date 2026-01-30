@@ -3,27 +3,46 @@
 @tailwind utilities;
 
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
+
+html {
+  scroll-behavior: smooth; /* Makes navigation links glide */
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  overflow-x: hidden;
+  color: rgb(var(--foreground-rgb));
+  background: black; /* Prevents white flash on reload */
+  overflow-x: hidden; /* Prevents horizontal scrollbar */
 }
 
-/* Custom Scrollbar to match the dark theme */
+/* --- FUTURISTIC SCROLLBAR --- */
+/* Width */
 ::-webkit-scrollbar {
   width: 8px;
 }
+
+/* Track (Background) */
 ::-webkit-scrollbar-track {
-  background: #0a0a0a; 
+  background: #050505; 
 }
+
+/* Handle (The moving part) */
 ::-webkit-scrollbar-thumb {
-  background: #333; 
+  background: #22d3ee; /* Cyan Color */
   border-radius: 4px;
 }
+
+/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #06b6d4; /* Darker Cyan */
+  box-shadow: 0 0 10px #22d3ee; /* Glowing effect */
+}
+
+/* --- TEXT SELECTION (Highlighting) --- */
+::selection {
+  background: #22d3ee; /* Cyan background */
+  color: #000; /* Black text */
 }
