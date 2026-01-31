@@ -22,12 +22,11 @@ import {
   SiCplusplus, SiFirebase, SiFlutter, SiOpencv, SiPython 
 } from 'react-icons/si';
 
-// --- COMPONENT: STARFIELD BACKGROUND (FIXED HYDRATION ERROR) ---
+// --- COMPONENT: STARFIELD BACKGROUND ---
 const Starfield = () => {
   const [stars, setStars] = useState([]);
 
   useEffect(() => {
-    // Generate stars ONLY on the client side to fix Hydration Error
     const generatedStars = new Array(50).fill(0).map(() => ({
       top: `${Math.random() * 100}%`,
       left: `${Math.random() * 100}%`,
@@ -61,12 +60,11 @@ const Starfield = () => {
   );
 };
 
-// --- COMPONENT: CUSTOM SPACE CURSOR ---
+// --- COMPONENT: CUSTOM CURSOR ---
 const CustomCursor = () => {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
   
-  // Checking window availability for safe SSR
   useEffect(() => {
     if (typeof window !== "undefined") {
         cursorX.set(window.innerWidth / 2);
@@ -95,7 +93,7 @@ const CustomCursor = () => {
   );
 };
 
-// --- COMPONENT: TYPEWRITER TEXT ---
+// --- COMPONENT: TYPEWRITER ---
 const Typewriter = ({ words, wait = 3000 }) => {
   const [index, setIndex] = useState(0);
   const [subIndex, setSubIndex] = useState(0);
@@ -117,7 +115,7 @@ const Typewriter = ({ words, wait = 3000 }) => {
   return <span className="text-cyan-400 font-mono tracking-widest drop-shadow-[0_0_8px_rgba(34,211,238,0.6)]">{`${words[index].substring(0, subIndex)}${blink ? "|" : " "}`}</span>;
 };
 
-// --- COMPONENT: EXPERIENCE TIMELINE ITEM ---
+// --- COMPONENT: TIMELINE ITEM ---
 const TimelineItem = ({ date, title, company, description, icon, isLeft }) => (
     <div className={`mb-8 flex justify-between items-center w-full ${isLeft ? 'flex-row-reverse' : ''} relative`}>
       <div className="order-1 w-5/12"></div>
@@ -138,31 +136,6 @@ const TimelineItem = ({ date, title, company, description, icon, isLeft }) => (
     </div>
 );
 
-// --- COMPONENT: ORBITING SKILL ICON ---
-const OrbitingSkill = ({ skill, radius, duration, reverse }) => {
-  return (
-    <div 
-      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-      style={{
-        width: `${radius * 2}px`,
-        height: `${radius * 2}px`,
-        animation: `spin ${duration}s linear infinite ${reverse ? 'reverse' : 'normal'}`,
-      }}
-    >
-      <div 
-        className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto"
-        style={{
-           animation: `spin ${duration}s linear infinite ${reverse ? 'normal' : 'reverse'}`, 
-        }}
-      >
-        <div className="w-12 h-12 md:w-16 md:h-16 bg-black/40 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-xl md:text-3xl text-white shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:scale-125 hover:border-cyan-400 hover:shadow-[0_0_20px_#22d3ee] transition-all cursor-pointer">
-          {skill.icon}
-        </div>
-      </div>
-    </div>
-  );
-};
-
 // --- COMPONENT: PROJECT CARD ---
 const ProjectCard = ({ project }) => (
   <motion.div whileHover={{ y: -5, boxShadow: "0 0 25px rgba(34,211,238,0.1)" }} className="group bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:border-cyan-500/50 transition-all cursor-none flex flex-col h-full">
@@ -180,12 +153,49 @@ const ProjectCard = ({ project }) => (
   </motion.div>
 );
 
+// --- COMPONENT: PERFECTLY ALIGNED ORBITAL SKILL ---
+// This component rotates the entire wrapper, keeping the icon pinned to the edge
+const OrbitingSkill = ({ skill, diameter, duration, reverse, initialAngle }) => {
+  return (
+    <div 
+      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+      style={{
+        width: `${diameter}px`,
+        height: `${diameter}px`,
+        // 1. Rotate to starting position
+        transform: `translate(-50%, -50%) rotate(${initialAngle}deg)`, 
+      }}
+    >
+      {/* 2. Animate the Rotation continuously */}
+      <div 
+        className="w-full h-full absolute top-0 left-0"
+        style={{
+            animation: `spin ${duration}s linear infinite ${reverse ? 'reverse' : 'normal'}`,
+        }}
+      >
+        {/* 3. Place Icon EXACTLY on the line (top center) */}
+        <div 
+            className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto"
+            style={{
+                // 4. Counter-rotate icon so it stays upright
+                animation: `spin ${duration}s linear infinite ${reverse ? 'normal' : 'reverse'}`,
+            }}
+        >
+            <div className="w-12 h-12 md:w-16 md:h-16 bg-black/60 backdrop-blur-md border border-cyan-500/30 rounded-full flex items-center justify-center text-xl md:text-3xl text-white shadow-[0_0_15px_rgba(34,211,238,0.2)] hover:scale-125 hover:border-cyan-400 hover:shadow-[0_0_25px_#22d3ee] transition-all cursor-pointer z-50">
+            {skill.icon}
+            </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // --- MAIN PORTFOLIO COMPONENT ---
 export default function Portfolio() {
   const formRef = useRef();
   const [loading, setLoading] = useState(false);
 
-  // --- ASTRONAUT TILT & FLOAT ---
+  // --- ASTRONAUT TILT ---
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const mouseX = useSpring(x, { stiffness: 150, damping: 15 });
@@ -224,9 +234,7 @@ export default function Portfolio() {
     { name: "Firebase", icon: <SiFirebase className="text-yellow-500"/> },
   ];
 
-  // --- SEPARATE PROJECT ARRAYS ---
   const groupProjects = [
-    { title: "Kumbh Rakshak", desc: "AI crowd safety protocol using DeepFace & CCTV.", tags: ["Python", "AI"], icon: "🛡️", link: "https://github.com/SaumyaPratapSingh-cyber/Kumbh-Rakshak-Surveillance-System" },
     { title: "Krishi Seva 2.0", desc: "Terraforming & Crop Analysis for farmers.", tags: ["MERN", "ML"], icon: "🌱", link: "https://github.com/SaumyaPratapSingh-cyber/Krishi-Seva-App-for-to-farmers-" },
   ];
 
@@ -244,8 +252,7 @@ export default function Portfolio() {
       <style jsx global>{`
         @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
         .animate-twinkle { animation-name: twinkle; }
-        @keyframes spin { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
-        /* Floating Animation */
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
       `}</style>
 
@@ -261,7 +268,7 @@ export default function Portfolio() {
         </div>
         
         <div className="flex gap-4">
-            <a href="/ManglaShukla_Resume.pdf" target="_blank" rel="noopener noreferrer" className="hidden md:flex items-center gap-2 px-6 py-2 border border-cyan-500/50 text-cyan-400 font-mono text-xs rounded hover:bg-cyan-900/20 transition-all cursor-none">
+            <a href="/Mangla Shukla_Resume.pdf" target="_blank" rel="noopener noreferrer" className="hidden md:flex items-center gap-2 px-6 py-2 border border-cyan-500/50 text-cyan-400 font-mono text-xs rounded hover:bg-cyan-900/20 transition-all cursor-none">
               <FaFileDownload /> RESUME_FILE
             </a>
             <a href="#contact" className="px-6 py-2 bg-cyan-500/10 border border-cyan-500/50 text-cyan-400 font-mono text-xs rounded hover:bg-cyan-500 hover:text-black transition-all cursor-none">
@@ -274,7 +281,6 @@ export default function Portfolio() {
       <section id="home" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className="min-h-screen flex flex-col md:flex-row items-center justify-center px-6 md:px-20 relative pt-20 overflow-hidden perspective-1000">
         <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="md:w-1/2 z-10 space-y-6 text-center md:text-left order-2 md:order-1">
           <h2 className="text-cyan-500 text-xs font-mono tracking-[0.3em]">/// EXPLORER ID: 21230510</h2>
-          
           <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-cyan-100 to-slate-600">
             MANGLA
           </h1>
@@ -290,16 +296,14 @@ export default function Portfolio() {
           </div>
         </motion.div>
         
-        {/* ASTRONAUT - REFINED MASK & FLOAT ANIMATION */}
+        {/* ASTRONAUT */}
         <motion.div 
             initial={{ opacity: 0, scale: 0.8 }} 
             animate={{ opacity: 1, scale: 1 }} 
             style={{ rotateX: rotateX, rotateY: rotateY, transformStyle: "preserve-3d" }} 
             className="md:w-1/2 h-[600px] w-full relative flex items-center justify-center order-1 md:order-2"
         >
-           {/* Added soft gradient mask and float animation */}
            <div className="w-full h-full [mask-image:radial-gradient(circle_at_center,white_40%,transparent_80%)] animate-[float_6s_ease-in-out_infinite]">
-              {/* ✨ REMOVED 'backgroundColor' PROP TO FIX ERROR ✨ */}
               <Spline scene="/astro.splinecode" className="w-full h-full" />
            </div>
         </motion.div>
@@ -357,35 +361,53 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* SKILLS */}
+      {/* SKILLS - PERFECTLY ALIGNED ORBITS */}
       <section id="skills" className="min-h-screen py-24 relative flex flex-col items-center justify-center overflow-hidden z-10">
         <div className="text-center z-10 mb-20">
           <h2 className="text-3xl font-bold mb-2 text-white">ORBITAL <span className="text-cyan-500">SYSTEMS</span></h2>
           <p className="text-gray-500 font-mono text-sm">/// TECH_STACK_ROTATION</p>
         </div>
 
+        {/* CONTAINER FOR THE SYSTEM */}
         <div className="relative w-[800px] h-[800px] flex items-center justify-center">
           
-          {/* ✨ SUN REFINED: Added rounded-full & Glow ✨ */}
+          {/* 1. SUN (Center) */}
           <div className="absolute z-10 w-[280px] h-[280px] rounded-full overflow-hidden shadow-[0_0_80px_rgba(253,186,116,0.8)]">
-             {/* ✨ REMOVED 'backgroundColor' PROP & ADDED INNER SHADOW FOR BLENDING ✨ */}
              <div className="w-full h-full rounded-full overflow-hidden" style={{ boxShadow: 'inset 0 0 50px rgba(0,0,0,0.8)' }}>
                 <Spline scene="/sun.splinecode" className="w-full h-full scale-110" />
              </div>
           </div>
           
-          <div className="absolute w-[450px] h-[450px] border border-cyan-500/20 rounded-full animate-[spin_25s_linear_infinite]" />
+          {/* 2. INNER ORBIT SYSTEM (Diameter 450px) */}
+          {/* The Visible Line */}
+          <div className="absolute w-[450px] h-[450px] border border-cyan-500/30 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+          {/* The Rotating Icons */}
           {innerOrbitSkills.map((skill, i) => (
-               <div key={i} className="absolute w-[450px] h-[450px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" style={{ transform: `translate(-50%, -50%) rotate(${i * (360/innerOrbitSkills.length)}deg)` }}>
-                 <OrbitingSkill skill={skill} radius={225} duration={25} reverse={false} />
-               </div>
+             <OrbitingSkill 
+                key={i} 
+                skill={skill} 
+                diameter={450} 
+                duration={25} 
+                reverse={false} 
+                initialAngle={i * (360 / innerOrbitSkills.length)} // Equidistant spacing
+             />
           ))}
-          <div className="absolute w-[700px] h-[700px] border border-purple-500/20 rounded-full" />
+
+          {/* 3. OUTER ORBIT SYSTEM (Diameter 700px) */}
+          {/* The Visible Line */}
+          <div className="absolute w-[700px] h-[700px] border border-purple-500/30 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+          {/* The Rotating Icons */}
           {outerOrbitSkills.map((skill, i) => (
-             <div key={i} className="absolute w-[700px] h-[700px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" style={{ transform: `translate(-50%, -50%) rotate(${i * (360/outerOrbitSkills.length)}deg)` }}>
-                 <OrbitingSkill skill={skill} radius={350} duration={40} reverse={true} />
-             </div>
+             <OrbitingSkill 
+                key={i} 
+                skill={skill} 
+                diameter={700} 
+                duration={40} 
+                reverse={true} 
+                initialAngle={i * (360 / outerOrbitSkills.length)} // Equidistant spacing
+             />
           ))}
+
         </div>
       </section>
 
@@ -394,7 +416,6 @@ export default function Portfolio() {
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold mb-16 text-center">COMPLETED <span className="text-cyan-500">MISSIONS</span></h2>
           
-          {/* GROUP PROJECTS SECTION */}
           <div className="mb-16">
             <h3 className="text-xl font-mono text-cyan-300 mb-8 border-b border-cyan-500/30 pb-2 inline-block">🚀 SQUADRON MISSIONS (Group Projects)</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -404,7 +425,6 @@ export default function Portfolio() {
             </div>
           </div>
 
-          {/* PERSONAL PROJECTS SECTION */}
           <div>
             <h3 className="text-xl font-mono text-purple-300 mb-8 border-b border-purple-500/30 pb-2 inline-block">👤 SOLO EXPEDITIONS (Personal Projects)</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
