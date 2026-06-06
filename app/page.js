@@ -3,59 +3,60 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import dynamic from 'next/dynamic';
+import { 
+  FaGithub, FaLinkedin, FaEnvelope, FaBullhorn, FaTrophy, FaBuilding, FaLaptopCode, FaCertificate, FaFileDownload, FaExternalLinkAlt 
+} from 'react-icons/fa';
+import { 
+  SiNextdotjs, SiTailwindcss, SiMongodb, SiExpress, SiReact, SiNodedotjs,
+  SiCplusplus, SiFirebase, SiFlutter, SiOpencv, SiPython, SiTensorflow, SiPostman, SiGit
+} from 'react-icons/si';
 
-// ✨ DYNAMIC SPLINE LOADER ✨
+// --- DYNAMIC SPLINE LOADER ---
 const Spline = dynamic(() => import('@splinetool/react-spline'), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-full flex items-center justify-center text-cyan-500 font-mono text-xs animate-pulse">
-      INITIALIZING SYSTEMS...
+    <div className="w-full h-full flex items-center justify-center text-amber-500 font-mono text-xs animate-pulse">
+      CONJURING 3D ELEMENTS...
     </div>
   ),
 });
 
-import { 
-  FaGithub, FaLinkedin, FaEnvelope, FaJava, FaBullhorn, FaTrophy, FaBuilding, FaLaptopCode, FaCertificate, FaFileDownload, FaExternalLinkAlt 
-} from 'react-icons/fa';
-import { 
-  SiNextdotjs, SiTailwindcss, SiMongodb, SiExpress, SiReact, SiNodedotjs,
-  SiCplusplus, SiFirebase, SiFlutter, SiOpencv, SiPython 
-} from 'react-icons/si';
-
-// --- COMPONENT: STARFIELD BACKGROUND ---
-const Starfield = () => {
-  const [stars, setStars] = useState([]);
+// --- COMPONENT: ROYAL EMBERS & GRADIENT BACKGROUND ---
+const EmbersAndDiyas = () => {
+  const [embers, setEmbers] = useState([]);
 
   useEffect(() => {
-    const generatedStars = new Array(50).fill(0).map(() => ({
-      top: `${Math.random() * 100}%`,
+    const generatedEmbers = new Array(35).fill(0).map(() => ({
       left: `${Math.random() * 100}%`,
-      size: `${Math.random() * 3}px`,
-      delay: `${Math.random() * 5}s`,
-      duration: `${3 + Math.random() * 3}s`
+      size: `${2 + Math.random() * 4}px`,
+      delay: `${Math.random() * 8}s`,
+      duration: `${6 + Math.random() * 8}s`
     }));
-    setStars(generatedStars);
+    setEmbers(generatedEmbers);
   }, []);
 
   return (
-    <div className="fixed inset-0 z-[-1] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#0f172a] via-[#020617] to-black overflow-hidden">
-      {stars.map((star, i) => (
+    <div className="fixed inset-0 z-[-1] bg-gradient-to-b from-[#220202] via-[#0d0101] to-[#040000] overflow-hidden">
+      {/* Drifting embers */}
+      {embers.map((ember, i) => (
         <div
           key={i}
-          className="absolute bg-white rounded-full opacity-0 animate-twinkle"
+          className="absolute bg-gradient-to-t from-amber-500 via-red-500 to-red-600 rounded-full opacity-0 animate-drift"
           style={{
-            top: star.top,
-            left: star.left,
-            width: star.size,
-            height: star.size,
-            animationDelay: star.delay,
-            animationDuration: star.duration,
-            animationIterationCount: 'infinite'
+            left: ember.left,
+            width: ember.size,
+            height: ember.size,
+            animationDelay: ember.delay,
+            animationDuration: ember.duration,
+            animationIterationCount: 'infinite',
+            boxShadow: '0 0 10px #f59e0b, 0 0 20px #dc2626'
           }}
         />
       ))}
-      <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-purple-900/20 rounded-full blur-[120px]" />
-      <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-cyan-900/20 rounded-full blur-[120px]" />
+      {/* Soft Palace Ambient Glows (Highly aesthetic reddish-gold lighting) */}
+      <div className="absolute top-[-5%] right-[-5%] w-[700px] h-[700px] bg-red-800/20 rounded-full blur-[140px] mix-blend-screen" />
+      <div className="absolute bottom-[-5%] left-[-5%] w-[700px] h-[700px] bg-amber-800/15 rounded-full blur-[140px] mix-blend-screen" />
+      <div className="absolute top-[30%] left-[20%] w-[500px] h-[500px] bg-red-900/15 rounded-full blur-[120px] mix-blend-screen" />
     </div>
   );
 };
@@ -87,8 +88,8 @@ const CustomCursor = () => {
 
   return (
     <>
-      <motion.div className="fixed top-0 left-0 w-2 h-2 bg-cyan-400 rounded-full pointer-events-none z-[9999] shadow-[0_0_15px_#22d3ee]" style={{ x: cursorX, y: cursorY, translateX: '-50%', translateY: '-50%' }} />
-      <motion.div className="fixed top-0 left-0 w-8 h-8 border border-cyan-500/50 rounded-full pointer-events-none z-[9998]" style={{ x: cursorXSpring, y: cursorYSpring, translateX: '-50%', translateY: '-50%' }} />
+      <motion.div className="fixed top-0 left-0 w-2 h-2 bg-amber-500 rounded-full pointer-events-none z-[9999] shadow-[0_0_15px_#f59e0b]" style={{ x: cursorX, y: cursorY, translateX: '-50%', translateY: '-50%' }} />
+      <motion.div className="fixed top-0 left-0 w-8 h-8 border border-amber-500/50 rounded-full pointer-events-none z-[9998]" style={{ x: cursorXSpring, y: cursorYSpring, translateX: '-50%', translateY: '-50%' }} />
     </>
   );
 };
@@ -112,49 +113,48 @@ const Typewriter = ({ words, wait = 3000 }) => {
     return () => clearTimeout(timeout);
   }, [subIndex, index, reverse, words, wait]);
 
-  return <span className="text-cyan-400 font-mono tracking-widest drop-shadow-[0_0_8px_rgba(34,211,238,0.6)]">{`${words[index].substring(0, subIndex)}${blink ? "|" : " "}`}</span>;
+  return <span className="text-amber-400 font-mono tracking-widest drop-shadow-[0_0_8px_rgba(245,158,11,0.6)]">{`${words[index].substring(0, subIndex)}${blink ? "|" : " "}`}</span>;
 };
 
 // --- COMPONENT: TIMELINE ITEM ---
 const TimelineItem = ({ date, title, company, description, icon, isLeft }) => (
     <div className={`mb-8 flex justify-between items-center w-full ${isLeft ? 'flex-row-reverse' : ''} relative`}>
       <div className="order-1 w-5/12"></div>
-      <div className="z-20 flex items-center order-1 bg-cyan-900/50 border border-cyan-400/30 shadow-[0_0_15px_rgba(34,211,238,0.3)] w-10 h-10 rounded-full justify-center text-cyan-300 backdrop-blur-md">
+      <div className="z-20 flex items-center order-1 bg-red-950/80 border border-amber-500/40 shadow-[0_0_15px_rgba(212,175,55,0.3)] w-10 h-10 rounded-full justify-center text-amber-400 backdrop-blur-md">
         {icon}
       </div>
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`order-1 bg-white/5 backdrop-blur-md rounded-lg shadow-xl w-5/12 px-6 py-4 border border-cyan-500/20 hover:border-cyan-500/50 transition-all ${isLeft ? 'text-right' : ''}`}
+        className={`order-1 bg-white/5 backdrop-blur-md rounded-lg shadow-xl w-5/12 px-6 py-4 border border-amber-500/20 hover:border-amber-500/50 transition-all ${isLeft ? 'text-right' : ''}`}
       >
-        <h3 className="mb-1 font-bold text-white text-lg font-mono">{title}</h3>
-        <h4 className="mb-2 text-cyan-400 text-sm font-semibold tracking-wider">{company}</h4>
-        <p className="text-sm leading-snug text-gray-400">{description}</p>
-        <span className="text-xs text-cyan-500/70 mt-2 block font-mono">{date}</span>
+        <h3 className="mb-1 font-bold text-white text-lg font-royal-subheading tracking-wide">{title}</h3>
+        <h4 className="mb-2 text-amber-400 text-sm font-semibold tracking-wider">{company}</h4>
+        <p className="text-sm leading-snug text-gray-300 font-body">{description}</p>
+        <span className="text-xs text-amber-500/70 mt-2 block font-mono">{date}</span>
       </motion.div>
     </div>
 );
 
 // --- COMPONENT: PROJECT CARD ---
 const ProjectCard = ({ project }) => (
-  <motion.div whileHover={{ y: -5, boxShadow: "0 0 25px rgba(34,211,238,0.1)" }} className="group bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:border-cyan-500/50 transition-all cursor-none flex flex-col h-full">
-    <div className="h-40 bg-gradient-to-br from-[#0f172a] to-black flex items-center justify-center text-5xl group-hover:text-cyan-400 transition">{project.icon}</div>
+  <motion.div whileHover={{ y: -5, boxShadow: "0 0 25px rgba(245,158,11,0.15)" }} className="group bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:border-amber-500/50 transition-all cursor-none flex flex-col h-full">
+    <div className="h-40 bg-gradient-to-br from-[#1c0505] to-black flex items-center justify-center text-5xl group-hover:text-amber-400 transition">{project.icon}</div>
     <div className="p-6 flex flex-col flex-grow">
-      <h3 className="text-xl font-bold mb-2 text-white group-hover:text-cyan-400 font-mono">{project.title}</h3>
-      <p className="text-gray-400 text-sm mb-4 flex-grow">{project.desc}</p>
-      <div className="flex gap-2 mb-4">
-        {project.tags.map(tag => (<span key={tag} className="text-[10px] bg-cyan-900/30 text-cyan-300 px-2 py-1 rounded font-mono border border-cyan-500/20">{tag}</span>))}
+      <h3 className="text-xl font-bold mb-2 text-white group-hover:text-amber-400 font-royal-subheading tracking-wide">{project.title}</h3>
+      <p className="text-gray-300 text-sm mb-4 flex-grow font-body">{project.desc}</p>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {project.tags.map(tag => (<span key={tag} className="text-[10px] bg-red-950/40 text-amber-300 px-2 py-1 rounded font-mono border border-amber-500/20">{tag}</span>))}
       </div>
-      <a href={project.link} target="_blank" rel="noopener noreferrer" className="mt-auto w-full py-2 bg-cyan-500/10 border border-cyan-500/30 text-center rounded text-cyan-300 font-mono text-xs hover:bg-cyan-500 hover:text-black transition-all flex items-center justify-center gap-2 cursor-none">
-        INITIATE MISSION <FaExternalLinkAlt />
+      <a href={project.link} target="_blank" rel="noopener noreferrer" className="mt-auto w-full py-2 bg-amber-500/10 border border-amber-500/30 text-center rounded text-amber-300 font-mono text-xs hover:bg-amber-500 hover:text-black transition-all flex items-center justify-center gap-2 cursor-none">
+        VISIT ARCHIVE <FaExternalLinkAlt />
       </a>
     </div>
   </motion.div>
 );
 
 // --- COMPONENT: PERFECTLY ALIGNED ORBITAL SKILL ---
-// This component rotates the entire wrapper, keeping the icon pinned to the edge
 const OrbitingSkill = ({ skill, diameter, duration, reverse, initialAngle }) => {
   return (
     <div 
@@ -162,30 +162,83 @@ const OrbitingSkill = ({ skill, diameter, duration, reverse, initialAngle }) => 
       style={{
         width: `${diameter}px`,
         height: `${diameter}px`,
-        // 1. Rotate to starting position
         transform: `translate(-50%, -50%) rotate(${initialAngle}deg)`, 
       }}
     >
-      {/* 2. Animate the Rotation continuously */}
       <div 
         className="w-full h-full absolute top-0 left-0"
         style={{
             animation: `spin ${duration}s linear infinite ${reverse ? 'reverse' : 'normal'}`,
         }}
       >
-        {/* 3. Place Icon EXACTLY on the line (top center) */}
         <div 
             className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto"
             style={{
-                // 4. Counter-rotate icon so it stays upright
                 animation: `spin ${duration}s linear infinite ${reverse ? 'normal' : 'reverse'}`,
             }}
         >
-            <div className="w-12 h-12 md:w-16 md:h-16 bg-black/60 backdrop-blur-md border border-cyan-500/30 rounded-full flex items-center justify-center text-xl md:text-3xl text-white shadow-[0_0_15px_rgba(34,211,238,0.2)] hover:scale-125 hover:border-cyan-400 hover:shadow-[0_0_25px_#22d3ee] transition-all cursor-pointer z-50">
+            <div className="w-12 h-12 md:w-16 md:h-16 bg-black/80 backdrop-blur-md border border-amber-500/30 rounded-full flex items-center justify-center text-xl md:text-3xl text-white shadow-[0_0_15px_rgba(212,175,55,0.2)] hover:scale-125 hover:border-amber-400 hover:shadow-[0_0_25px_#f59e0b] transition-all cursor-pointer z-50">
             {skill.icon}
             </div>
         </div>
       </div>
+    </div>
+  );
+};
+
+// --- COMPONENT: MYSTERY RED CURTAIN (PARDA) REVEAL ---
+const CurtainReveal = ({ src, alt }) => {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div 
+      className="relative w-80 h-80 md:w-96 md:h-96 rounded-[2rem] overflow-hidden border-2 border-amber-500/30 shadow-2xl cursor-none"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Background Image (User Photo) */}
+      <img 
+        src={src} 
+        alt={alt} 
+        className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+      />
+
+      {/* Crimson Left Curtain Panel */}
+      <motion.div 
+        initial={{ x: 0 }}
+        animate={{ x: hovered ? "-100%" : "0%" }}
+        transition={{ duration: 0.8, ease: "easeInOut" }}
+        className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-red-800 via-red-950 to-red-900 border-r border-amber-500/40 z-20 flex justify-end items-center"
+        style={{ transformOrigin: "left" }}
+      >
+        {/* Gold Handle/Tassel on Left Curtain */}
+        <div className="w-1.5 h-16 bg-gradient-to-b from-amber-400 via-amber-200 to-amber-600 rounded-full mr-2 shadow-[0_0_10px_rgba(245,158,11,0.5)] flex items-center justify-center">
+          <div className="w-4 h-4 rounded-full bg-amber-400 border border-red-950" />
+        </div>
+      </motion.div>
+
+      {/* Crimson Right Curtain Panel */}
+      <motion.div 
+        initial={{ x: 0 }}
+        animate={{ x: hovered ? "100%" : "0%" }}
+        transition={{ duration: 0.8, ease: "easeInOut" }}
+        className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-red-800 via-red-950 to-red-900 border-l border-amber-500/40 z-20 flex justify-start items-center"
+        style={{ transformOrigin: "right" }}
+      >
+        {/* Gold Handle/Tassel on Right Curtain */}
+        <div className="w-1.5 h-16 bg-gradient-to-b from-amber-400 via-amber-200 to-amber-600 rounded-full ml-2 shadow-[0_0_10px_rgba(245,158,11,0.5)] flex items-center justify-center">
+          <div className="w-4 h-4 rounded-full bg-amber-400 border border-red-950" />
+        </div>
+      </motion.div>
+
+      {/* Ambient overlay */}
+      <div className="absolute inset-0 bg-red-950/10 pointer-events-none mix-blend-overlay z-10" />
+
+      {/* Decorative Ornate Corner Borders */}
+      <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-amber-400/40 pointer-events-none z-30" />
+      <div className="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-amber-400/40 pointer-events-none z-30" />
+      <div className="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-amber-400/40 pointer-events-none z-30" />
+      <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-amber-400/40 pointer-events-none z-30" />
     </div>
   );
 };
@@ -195,27 +248,11 @@ export default function Portfolio() {
   const formRef = useRef();
   const [loading, setLoading] = useState(false);
 
-  // --- ASTRONAUT TILT ---
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const mouseX = useSpring(x, { stiffness: 150, damping: 15 });
-  const mouseY = useSpring(y, { stiffness: 150, damping: 15 });
-  
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], ["25deg", "-25deg"]);
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-25deg", "25deg"]);
-
-  function handleMouseMove(event) {
-    const rect = event.currentTarget.getBoundingClientRect();
-    x.set((event.clientX - rect.left) / rect.width - 0.5);
-    y.set((event.clientY - rect.top) / rect.height - 0.5);
-  }
-  function handleMouseLeave() { x.set(0); y.set(0); }
-
   const sendEmail = (e) => {
     e.preventDefault();
     setLoading(true);
     emailjs.sendForm('service_ghhiqnh', 'template_e2bht5q', formRef.current, 'fTUznH7Lbg9Xn7pWs')
-      .then(() => { setLoading(false); alert("Signal Transmitted!"); e.target.reset(); }, () => { setLoading(false); alert("Transmission Failed."); });
+      .then(() => { setLoading(false); alert("Summon Dispatch Success!"); e.target.reset(); }, () => { setLoading(false); alert("Dispatch Failed."); });
   };
 
   const innerOrbitSkills = [
@@ -223,94 +260,96 @@ export default function Portfolio() {
     { name: "Node", icon: <SiNodedotjs className="text-green-500"/> },
     { name: "Mongo", icon: <SiMongodb className="text-green-400"/> },
     { name: "Next", icon: <SiNextdotjs className="text-white"/> },
-    { name: "Tailwind", icon: <SiTailwindcss className="text-cyan-300"/> },
+    { name: "Express", icon: <SiExpress className="text-amber-200"/> },
   ];
   const outerOrbitSkills = [
     { name: "Python", icon: <SiPython className="text-yellow-400"/> },
-    { name: "Java", icon: <FaJava className="text-red-500"/> },
     { name: "Cpp", icon: <SiCplusplus className="text-blue-500"/> },
-    { name: "Flutter", icon: <SiFlutter className="text-blue-400"/> },
     { name: "OpenCV", icon: <SiOpencv className="text-green-300"/> },
+    { name: "TensorFlow", icon: <SiTensorflow className="text-orange-500"/> },
     { name: "Firebase", icon: <SiFirebase className="text-yellow-500"/> },
+    { name: "Git", icon: <SiGit className="text-red-500"/> },
   ];
 
-  const groupProjects = [
-    { title: "Krishi Seva 2.0", desc: "Terraforming & Crop Analysis for farmers.", tags: ["MERN", "ML"], icon: "🌱", link: "https://github.com/SaumyaPratapSingh-cyber/Krishi-Seva-App-for-to-farmers-" },
+  const hackathonProjects = [
+    { title: "PrepXtra", desc: "A modern, advanced learning system featuring an AI-driven 3D interviewer to simulate real-world technical assessments, evaluating developer capabilities dynamically.", tags: ["Next.js", "AI Agent", "Three.js", "WebRTC"], icon: "🤖", link: "https://github.com/SaumyaPratapSingh-cyber/PrepXtra" },
+    { title: "Kumbh Rakshak", desc: "Podium-winning security and crowd safety platform designed for the Kumbh Mela. Automatically monitors real-time feeds from 1000+ security cameras using AI object tracking to find missing persons and map dense pedestrian flows.", tags: ["Computer Vision", "AI Tracking", "Node.js", "Mapbox"], icon: "👁️", link: "https://github.com/SaumyaPratapSingh-cyber/Kumbh-Rakshak-Surveillance-System" },
+    { title: "Krishi Seva 2.0", desc: "Crop analysis platform integrating Machine Learning models with 85% accuracy in soil health analysis and real-time recommendation, improving yield predictions by 15% for local farmers.", tags: ["Flutter", "Firebase", "Machine Learning", "GCP"], icon: "🌱", link: "https://github.com/SaumyaPratapSingh-cyber/Krishi-Seva-App-for-to-farmers-" },
   ];
 
   const personalProjects = [
-    { title: "MudraVani", desc: "Universal Sign Language Translator.", tags: ["Python", "OpenCV"], icon: "✋", link: "https://github.com/Manglashukla/MudraVani-AI" },
-    { title: "ShoppingKart", desc: "Galactic E-commerce System.", tags: ["React", "Node"], icon: "🛒", link: "https://github.com/Manglashukla/shoppingkart" },
-    { title: "Expense Tracker", desc: "Resource Logistics & Tracking.", tags: ["Python", "Data"], icon: "📊", link: "https://github.com/Manglashukla/Expense-Tracker" }
+    { title: "Satyamev-Chain", desc: "Decentralized blockchain application for transparent civic data management, processing immutable records that improved local data accountability by an estimated 40% for targeted user groups.", tags: ["Blockchain", "Web3", "Full-Stack"], icon: "⛓️", link: "https://github.com/Manglashukla/Yantriq" },
+    { title: "Mudra-Vani", desc: "Accessible sign language translator using computer vision, recognizing 50+ distinct gestures with low latency (<200ms per frame) to convert hand movements to text.", tags: ["Python", "OpenCV", "MediaPipe", "TensorFlow"], icon: "✋", link: "https://github.com/Manglashukla/MudraVani-AI" },
+    { title: "ShoppingKart", desc: "Advanced MERN stack e-commerce platform with secure JWT authentication, Stripe payment integration, Cloudinary media hosting, and an admin analytics dashboard.", tags: ["MERN Stack", "JWT", "Stripe", "Cloudinary"], icon: "🛒", link: "https://github.com/Manglashukla/shoppingkart" }
   ];
 
   return (
-    <div className="text-white min-h-screen font-sans selection:bg-cyan-500 selection:text-black overflow-x-hidden cursor-none">
-      <Starfield />
+    <div className="text-white min-h-screen font-sans selection:bg-red-800 selection:text-amber-300 overflow-x-hidden cursor-none">
+      <EmbersAndDiyas />
       <CustomCursor />
 
       <style jsx global>{`
-        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
-        .animate-twinkle { animation-name: twinkle; }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
       `}</style>
 
       {/* NAVBAR */}
-      <nav className="fixed top-0 w-full p-6 flex justify-between items-center z-50 backdrop-blur-sm bg-black/10 border-b border-white/5">
-        <h1 className="text-2xl font-bold tracking-tighter">MANGLA<span className="text-cyan-400">.GALAXY</span></h1>
-        <div className="hidden md:flex gap-8 text-xs font-mono tracking-widest text-cyan-100/70">
-          <a href="#home" className="hover:text-cyan-400 transition cursor-none">[BASE]</a>
-          <a href="#about" className="hover:text-cyan-400 transition cursor-none">[ABOUT]</a>
-          <a href="#experience" className="hover:text-cyan-400 transition cursor-none">[LOGS]</a>
-          <a href="#skills" className="hover:text-cyan-400 transition cursor-none">[SYSTEMS]</a>
-          <a href="#projects" className="hover:text-cyan-400 transition cursor-none">[MISSIONS]</a>
+      <nav className="fixed top-0 w-full p-6 flex justify-between items-center z-50 backdrop-blur-md bg-black/30 border-b border-amber-500/10">
+        <h1 className="text-xl font-royal-heading font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-200 to-amber-600 royal-glow-gold">
+          MANGLA<span className="text-red-500 font-sans font-medium text-base ml-1">SHUKLA</span>
+        </h1>
+        <div className="hidden md:flex gap-8 text-xs font-mono tracking-widest text-amber-100/60">
+          <a href="#home" className="hover:text-amber-400 transition cursor-none">[COURTYARD]</a>
+          <a href="#about" className="hover:text-amber-400 transition cursor-none">[CHRONICLES]</a>
+          <a href="#experience" className="hover:text-amber-400 transition cursor-none">[LEGACY]</a>
+          <a href="#skills" className="hover:text-amber-400 transition cursor-none">[TALENTS]</a>
+          <a href="#projects" className="hover:text-amber-400 transition cursor-none">[CREATIONS]</a>
+          <a href="#achievements" className="hover:text-amber-400 transition cursor-none">[GLORY]</a>
         </div>
         
         <div className="flex gap-4">
-            <a href="/Mangla Shukla_Resume.pdf" target="_blank" rel="noopener noreferrer" className="hidden md:flex items-center gap-2 px-6 py-2 border border-cyan-500/50 text-cyan-400 font-mono text-xs rounded hover:bg-cyan-900/20 transition-all cursor-none">
-              <FaFileDownload /> RESUME_FILE
+            <a href="/Mangla Shukla_Resume.pdf" target="_blank" rel="noopener noreferrer" className="hidden md:flex items-center gap-2 px-6 py-2 border border-amber-500/50 text-amber-400 font-mono text-xs rounded hover:bg-amber-500/10 transition-all cursor-none royal-glow-gold">
+              <FaFileDownload /> RESUME
             </a>
-            <a href="#contact" className="px-6 py-2 bg-cyan-500/10 border border-cyan-500/50 text-cyan-400 font-mono text-xs rounded hover:bg-cyan-500 hover:text-black transition-all cursor-none">
-              CONNECT_UPLINK
+            <a href="#contact" className="px-6 py-2 bg-red-950/40 border border-amber-500/50 text-amber-400 font-mono text-xs rounded hover:bg-amber-500 hover:text-black transition-all cursor-none">
+              SUMMON_COURT
             </a>
         </div>
       </nav>
 
       {/* HERO SECTION */}
-      <section id="home" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className="min-h-screen flex flex-col md:flex-row items-center justify-center px-6 md:px-20 relative pt-20 overflow-hidden perspective-1000">
+      <section id="home" className="min-h-screen flex flex-col md:flex-row items-center justify-center px-6 md:px-20 relative pt-24 overflow-hidden perspective-1000">
         <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="md:w-1/2 z-10 space-y-6 text-center md:text-left order-2 md:order-1">
-          <h2 className="text-cyan-500 text-xs font-mono tracking-[0.3em]">/// EXPLORER ID: 21230510</h2>
-          <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-cyan-100 to-slate-600">
-            MANGLA
+          <h2 className="text-amber-500 text-xs font-mono tracking-[0.3em]">/// COURT DESIGNATION: FULL-STACK ARCHITECT & AI ENGINEER</h2>
+          <h1 className="text-4xl md:text-7xl font-black font-royal-heading tracking-widest text-transparent bg-clip-text bg-gradient-to-br from-white via-amber-100 to-amber-600 royal-glow-gold">
+            MANGLA SHUKLA
           </h1>
-          <div className="text-lg md:text-2xl font-mono text-cyan-200/80 h-8">
-            <Typewriter words={["SPACE_DEV", "AI_PIONEER", "SYSTEM_ARCHITECT"]} />
+          <div className="text-lg md:text-2xl font-mono text-amber-200/80 h-8">
+            <Typewriter words={["TECH_MAESTRO", "FULL_STACK_ARCHITECT", "AI_CRAFTSMAN"]} />
           </div>
-          <p className="text-gray-400 max-w-lg mx-auto md:mx-0 leading-relaxed font-light">
-            Traversing the digital cosmos. Specialized in <b className="text-white">MERN Systems</b> and <b className="text-white">Artificial Intelligence</b> protocols.
+          <p className="text-gray-300 max-w-lg mx-auto md:mx-0 leading-relaxed font-light font-body">
+            Crafting scalable software kingdoms. Specialized in the <b className="text-amber-400">MERN Stack</b>, <b className="text-amber-400">Artificial Intelligence</b> protocols, and algorithmic logic.
           </p>
           <div className="flex gap-4 justify-center md:justify-start pt-4">
-            <a href="https://linkedin.com/in/mangla-shukla" target="_blank" className="flex items-center gap-2 px-8 py-3 rounded bg-white text-black font-bold hover:bg-cyan-400 transition cursor-none"><FaLinkedin /> LINKEDIN</a>
-            <a href="https://github.com/Manglashukla" target="_blank" className="flex items-center gap-2 px-8 py-3 rounded border border-white/20 hover:border-cyan-400 hover:text-cyan-400 transition cursor-none"><FaGithub /> GITHUB</a>
+            <a href="https://www.linkedin.com/in/mangla-shukla/" target="_blank" className="flex items-center gap-2 px-8 py-3 rounded bg-amber-500 text-black font-bold hover:bg-amber-400 transition cursor-none"><FaLinkedin /> LINKEDIN</a>
+            <a href="https://github.com/Manglashukla" target="_blank" className="flex items-center gap-2 px-8 py-3 rounded border border-amber-500/20 hover:border-amber-400 hover:text-amber-400 transition cursor-none"><FaGithub /> GITHUB</a>
           </div>
         </motion.div>
         
-        {/* ASTRONAUT */}
-        <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }} 
-            animate={{ opacity: 1, scale: 1 }} 
-            style={{ rotateX: rotateX, rotateY: rotateY, transformStyle: "preserve-3d" }} 
-            className="md:w-1/2 h-[600px] w-full relative flex items-center justify-center order-1 md:order-2"
-        >
-           <div className="w-full h-full [mask-image:radial-gradient(circle_at_center,white_40%,transparent_80%)] animate-[float_6s_ease-in-out_infinite]">
-              <Spline scene="/astro.splinecode" className="w-full h-full" />
-           </div>
-        </motion.div>
+        {/* USER SPECIFIED 3D SPLINE CANVAS WITH Dedicated backglow aura */}
+        <div className="md:w-1/2 w-full h-[550px] relative flex items-center justify-center order-1 md:order-2">
+          {/* Rich Crimson and Gold Backdrop Auras */}
+          <div className="absolute w-[450px] h-[450px] bg-red-800/25 rounded-full blur-[90px] pointer-events-none mix-blend-screen" />
+          <div className="absolute w-[300px] h-[300px] bg-amber-600/15 rounded-full blur-[70px] pointer-events-none mix-blend-screen" />
+          
+          <div className="w-full h-full [mask-image:radial-gradient(circle_at_center,white_60%,transparent_90%)] animate-[float_6s_ease-in-out_infinite] pt-4 z-10">
+            <Spline scene="https://prod.spline.design/k3zEjNgimy9bmYC2/scene.splinecode" className="w-full h-full" />
+          </div>
+        </div>
       </section>
 
-      {/* ABOUT ME */}
-      <section id="about" className="py-24 px-6 relative z-10 bg-black/20">
+      {/* ABOUT ME - [CHRONICLES] */}
+      <section id="about" className="py-24 px-6 relative z-10 bg-black/40 border-t border-b border-amber-500/5">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-16">
             <motion.div 
                 initial={{ opacity: 0, x: -50 }}
@@ -318,70 +357,131 @@ export default function Portfolio() {
                 transition={{ duration: 0.6 }}
                 className="md:w-1/2 flex justify-center"
             >
-                <div className="relative w-80 h-80 md:w-96 md:h-96 group">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-cyan-600 to-blue-600 rounded-[2rem] rotate-6 opacity-50 blur-lg group-hover:rotate-12 transition-all duration-500"></div>
-                    <img src="/myphoto.png" alt="Mangla Shukla" className="relative w-full h-full object-cover rounded-[2rem] border-2 border-white/10 shadow-2xl grayscale hover:grayscale-0 transition duration-500"/>
+                <div className="relative group">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-amber-600 to-red-700 rounded-[2rem] rotate-6 opacity-30 blur-lg group-hover:rotate-12 transition-all duration-500"></div>
+                    <CurtainReveal src="/myphoto.png" alt="Mangla Shukla" />
                 </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} className="md:w-1/2 space-y-6">
                 <div className="flex items-center gap-2">
-                    <span className="h-1 w-12 bg-cyan-500 rounded-full"></span>
-                    <h2 className="text-3xl font-bold uppercase tracking-wider text-white">About Profile</h2>
+                    <span className="h-1 w-12 bg-amber-500 rounded-full"></span>
+                    <h2 className="text-3xl font-royal-heading font-bold uppercase tracking-wider text-white">About Profile</h2>
                 </div>
-                <h3 className="text-4xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">
-                    I'm <span className="text-cyan-400">Mangla Shukla</span>, navigating the frontiers of Code & AI.
+                <h3 className="text-3xl font-royal-subheading leading-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-amber-200">
+                    I'm <span className="text-amber-400">Mangla Shukla</span>, Architect of Web Systems and Intelligent Engines.
                 </h3>
-                <p className="text-gray-400 leading-relaxed text-lg font-light">
-                    My mission is to engineer robust digital systems. I specialize in building full-stack applications using the <b>MERN Stack</b> and developing intelligent models with <b>Python & AI</b>.
+                <p className="text-gray-300 leading-relaxed text-lg font-light font-body">
+                  Dynamic Full-Stack Developer and AI Engineer specializing in the MERN Stack and Artificial Intelligence protocols. Experienced in creating scalable end-to-end applications with strong problem-solving skills rooted in Data Structures and Algorithms.
                 </p>
                 <div className="grid grid-cols-3 gap-6 pt-6 font-mono text-sm">
-                    <div className="p-4 bg-white/5 rounded border border-white/10"><h4 className="text-2xl font-bold text-white">&lt;1</h4><p className="text-cyan-500">Year Exp.</p></div>
-                    <div className="p-4 bg-white/5 rounded border border-white/10"><h4 className="text-2xl font-bold text-white">05+</h4><p className="text-cyan-500">Projects</p></div>
-                    <div className="p-4 bg-white/5 rounded border border-white/10"><h4 className="text-2xl font-bold text-white">05+</h4><p className="text-cyan-500">Hackathons</p></div>
+                    <div className="p-4 bg-white/5 rounded border border-amber-500/10"><h4 className="text-2xl font-bold text-white">2027</h4><p className="text-amber-500">B.Tech Grad</p></div>
+                    <div className="p-4 bg-white/5 rounded border border-amber-500/10"><h4 className="text-2xl font-bold text-white">06+</h4><p className="text-amber-500">Creations</p></div>
+                    <div className="p-4 bg-white/5 rounded border border-amber-500/10"><h4 className="text-2xl font-bold text-white">GFG #1</h4><p className="text-amber-500">DSA Rank</p></div>
                 </div>
             </motion.div>
         </div>
       </section>
 
-      {/* EXPERIENCE */}
+      {/* EXPERIENCE & EDUCATION - [LEGACY] */}
       <section id="experience" className="py-24 px-6 relative z-10">
         <div className="max-w-4xl mx-auto h-full">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-2 text-white">MISSION <span className="text-cyan-500">LOGS</span></h2>
-            <p className="text-gray-500 font-mono text-sm">/// EXPERIENCE & EDUCATION</p>
+            <h2 className="text-3xl font-royal-heading font-bold mb-2 text-white">CHRONICLES OF <span className="text-amber-400">LEGACY</span></h2>
+            <p className="text-gray-500 font-mono text-sm">/// EXPERIENCE & EDUCATION PATHWAY</p>
           </div>
           <div className="relative wrap overflow-hidden p-4 h-full">
-            <div className="border-2-2 absolute border-opacity-20 border-cyan-500/30 h-full border" style={{ left: '50%' }}></div>
-            <TimelineItem isLeft={true} date="Sep 2025 - Present" title="Campus Ambassador" company="Unstop" icon={<FaBullhorn />} description="Promoting coding culture and organizing hackathons." />
-            <TimelineItem isLeft={false} date="2025" title="GDGOC Hackathon Finalist" company="Google Developer Groups" icon={<FaTrophy />} description="Secured Top 10 rank with 'Kumbh Rakshak' project." />
-            <TimelineItem isLeft={true} date="Aug 2025" title="Web Dev Intern" company="IBM" icon={<FaBuilding />} description="Developed a full-stack e-commerce platform using MERN." />
-            <TimelineItem isLeft={false} date="Summer 2024" title="Python Training" company="UCER" icon={<FaLaptopCode />} description="Intensive summer training in Python & Data Science." />
-            <TimelineItem isLeft={true} date="2023 - 2027" title="B.Tech (CSE - AI/ML)" company="UCER" icon={<FaCertificate />} description="Pursuing B.Tech with specialization in AI & ML." />
+            <div className="border-2-2 absolute border-opacity-20 border-amber-500/30 h-full border" style={{ left: '50%' }}></div>
+            
+            <TimelineItem 
+              isLeft={true} 
+              date="Sep 2025 - Present" 
+              title="Campus Ambassador" 
+              company="Unstop" 
+              icon={<FaBullhorn />} 
+              description="Spearheaded the organization of 5+ technical events and hackathons. Led communication strategies on campus, boosting student engagement by 30%." 
+            />
+            
+            <TimelineItem 
+              isLeft={false} 
+              date="Jun 2025 - Aug 2025" 
+              title="Web Development Intern" 
+              company="IBM (Remote)" 
+              icon={<FaBuilding />} 
+              description="Collaborated in a cross-functional team to engineer a scalable MERN stack e-commerce platform optimized for 500+ concurrent users. Built secure authentication and RESTful APIs, reducing data retrieval latency by 20%." 
+            />
+
+            <TimelineItem 
+              isLeft={true} 
+              date="Jan 2025" 
+              title="GDGOC Hackathon 3rd Place" 
+              company="Google Developer Groups" 
+              icon={<FaTrophy />} 
+              description="Podium finish (3rd Position) for the innovative civic project 'Kumbh Rakshak', which optimized public tracking systems during massive gatherings." 
+            />
+
+            <TimelineItem 
+              isLeft={false} 
+              date="2023 - 2027" 
+              title="B.Tech (CSE - AI & ML)" 
+              company="United College of Engineering and Research" 
+              icon={<FaLaptopCode />} 
+              description="Pursuing B.Tech specialization in Artificial Intelligence & Machine Learning. Relevant coursework: Data Structures, OOP, DBMS, OS, and ML foundations." 
+            />
+
+            <TimelineItem 
+              isLeft={true} 
+              date="Jul 2023" 
+              title="Python Programming Certification" 
+              company="UCER" 
+              icon={<FaCertificate />} 
+              description="Completed rigorous training in Python development, focusing on data science and structural scripting protocols." 
+            />
+
+            <TimelineItem 
+              isLeft={false} 
+              date="Completed May 2023" 
+              title="Intermediate (Class XII)" 
+              company="UP Board (PCM Stream)" 
+              icon={<FaCertificate />} 
+              description="Scored 87% in Intermediate exams, establishing a solid mathematical and technical foundation." 
+            />
           </div>
         </div>
       </section>
 
-      {/* SKILLS - PERFECTLY ALIGNED ORBITS */}
-      <section id="skills" className="min-h-screen py-24 relative flex flex-col items-center justify-center overflow-hidden z-10">
+      {/* SKILLS - [TALENTS] - PERFECTLY ALIGNED ORBITS */}
+      <section id="skills" className="min-h-screen py-24 relative flex flex-col items-center justify-center overflow-hidden z-10 bg-black/20">
         <div className="text-center z-10 mb-20">
-          <h2 className="text-3xl font-bold mb-2 text-white">ORBITAL <span className="text-cyan-500">SYSTEMS</span></h2>
-          <p className="text-gray-500 font-mono text-sm">/// TECH_STACK_ROTATION</p>
+          <h2 className="text-3xl font-royal-heading font-bold mb-2 text-white">ORBITAL <span className="text-amber-400">TALENTS</span></h2>
+          <p className="text-gray-500 font-mono text-sm">/// TECHNICAL ORBIT SYSTEMS</p>
         </div>
 
         {/* CONTAINER FOR THE SYSTEM */}
-        <div className="relative w-[800px] h-[800px] flex items-center justify-center">
+        <div className="relative w-[800px] h-[800px] flex items-center justify-center scale-90 md:scale-100">
           
-          {/* 1. SUN (Center) */}
-          <div className="absolute z-10 w-[280px] h-[280px] rounded-full overflow-hidden shadow-[0_0_80px_rgba(253,186,116,0.8)]">
-             <div className="w-full h-full rounded-full overflow-hidden" style={{ boxShadow: 'inset 0 0 50px rgba(0,0,0,0.8)' }}>
-                <Spline scene="/sun.splinecode" className="w-full h-full scale-110" />
-             </div>
+          {/* ROYAL GOLDEN MANDALA (Center) */}
+          <div className="absolute z-10 w-[240px] h-[240px] flex items-center justify-center animate-[spin_60s_linear_infinite]">
+            <svg viewBox="0 0 100 100" className="w-full h-full text-amber-500 drop-shadow-[0_0_15px_rgba(245,158,11,0.5)]" fill="none" stroke="currentColor" strokeWidth="0.8">
+              <circle cx="50" cy="50" r="48" strokeDasharray="2 2" />
+              <circle cx="50" cy="50" r="44" />
+              {Array.from({ length: 12 }).map((_, i) => (
+                <path key={i} d="M50 50 C40 30 60 30 50 10 C40 30 60 30 50 50" transform={`rotate(${i * 30} 50 50)`} />
+              ))}
+              {Array.from({ length: 24 }).map((_, i) => (
+                <circle key={i} cx="50" cy="18" r="1.2" transform={`rotate(${i * 15} 50 50)`} fill="currentColor" />
+              ))}
+              <circle cx="50" cy="50" r="30" strokeDasharray="3 3" />
+              <circle cx="50" cy="50" r="20" />
+              {Array.from({ length: 8 }).map((_, i) => (
+                <path key={i} d="M50 50 C45 40 55 40 50 30" transform={`rotate(${i * 45} 50 50)`} />
+              ))}
+              <circle cx="50" cy="50" r="8" fill="currentColor" className="opacity-20" />
+              <circle cx="50" cy="50" r="4" fill="currentColor" />
+            </svg>
           </div>
           
-          {/* 2. INNER ORBIT SYSTEM (Diameter 450px) */}
-          {/* The Visible Line */}
-          <div className="absolute w-[450px] h-[450px] border border-cyan-500/30 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-          {/* The Rotating Icons */}
+          {/* INNER ORBIT SYSTEM (Diameter 450px) */}
+          <div className="absolute w-[450px] h-[450px] border border-amber-500/20 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
           {innerOrbitSkills.map((skill, i) => (
              <OrbitingSkill 
                 key={i} 
@@ -389,14 +489,12 @@ export default function Portfolio() {
                 diameter={450} 
                 duration={25} 
                 reverse={false} 
-                initialAngle={i * (360 / innerOrbitSkills.length)} // Equidistant spacing
+                initialAngle={i * (360 / innerOrbitSkills.length)}
              />
           ))}
 
-          {/* 3. OUTER ORBIT SYSTEM (Diameter 700px) */}
-          {/* The Visible Line */}
-          <div className="absolute w-[700px] h-[700px] border border-purple-500/30 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-          {/* The Rotating Icons */}
+          {/* OUTER ORBIT SYSTEM (Diameter 700px) */}
+          <div className="absolute w-[700px] h-[700px] border border-red-800/20 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
           {outerOrbitSkills.map((skill, i) => (
              <OrbitingSkill 
                 key={i} 
@@ -404,29 +502,31 @@ export default function Portfolio() {
                 diameter={700} 
                 duration={40} 
                 reverse={true} 
-                initialAngle={i * (360 / outerOrbitSkills.length)} // Equidistant spacing
+                initialAngle={i * (360 / outerOrbitSkills.length)}
              />
           ))}
 
         </div>
       </section>
 
-      {/* PROJECTS */}
+      {/* PROJECTS - [CREATIONS] */}
       <section id="projects" className="py-24 px-6 relative z-10">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold mb-16 text-center">COMPLETED <span className="text-cyan-500">MISSIONS</span></h2>
+          <h2 className="text-3xl font-royal-heading font-bold mb-16 text-center">LEGACY <span className="text-amber-400">CREATIONS</span></h2>
           
+          {/* HACKATHON MISSIONS */}
           <div className="mb-16">
-            <h3 className="text-xl font-mono text-cyan-300 mb-8 border-b border-cyan-500/30 pb-2 inline-block">🚀 SQUADRON MISSIONS (Group Projects)</h3>
+            <h3 className="text-lg font-mono text-amber-300 mb-8 border-b border-amber-500/30 pb-2 inline-block">🏆 HACKATHON MISSIONS</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {groupProjects.map((project, i) => (
+                {hackathonProjects.map((project, i) => (
                     <ProjectCard key={i} project={project} />
                 ))}
             </div>
           </div>
 
+          {/* SOLO EXPEDITIONS */}
           <div>
-            <h3 className="text-xl font-mono text-purple-300 mb-8 border-b border-purple-500/30 pb-2 inline-block">👤 SOLO EXPEDITIONS (Personal Projects)</h3>
+            <h3 className="text-lg font-mono text-red-300 mb-8 border-b border-red-500/30 pb-2 inline-block">👤 SOLO EXPEDITIONS</h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {personalProjects.map((project, i) => (
                     <ProjectCard key={i} project={project} />
@@ -437,27 +537,113 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* CONTACT */}
+      {/* ACHIEVEMENTS & CERTIFICATIONS - [GLORY] */}
+      <section id="achievements" className="py-24 px-6 relative z-10 bg-black/40 border-t border-b border-amber-500/5">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-royal-heading font-bold mb-2 text-white">COURT OF <span className="text-amber-400">GLORY</span></h2>
+            <p className="text-gray-500 font-mono text-sm">/// ACHIEVEMENTS & RECOGNITIONS</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Left side achievements */}
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className="p-8 bg-white/5 border border-amber-500/20 rounded-2xl space-y-6"
+            >
+              <h3 className="text-xl font-royal-subheading font-bold text-amber-400 border-b border-amber-500/20 pb-2 flex items-center gap-2">
+                <FaTrophy /> Major Milestones
+              </h3>
+              
+              <ul className="space-y-4 font-body text-sm text-gray-300">
+                <li className="flex gap-3 items-start">
+                  <span className="text-amber-500 mt-1">✦</span>
+                  <div>
+                    <strong className="text-white">3rd Position: GDGOC Hackathon 2025</strong>
+                    <p className="text-gray-400 text-xs">Awarded by Google Developer Groups for the project 'Kumbh Rakshak'.</p>
+                  </div>
+                </li>
+                <li className="flex gap-3 items-start">
+                  <span className="text-amber-500 mt-1">✦</span>
+                  <div>
+                    <strong className="text-white">1st Rank: GeeksforGeeks DSA Contest</strong>
+                    <p className="text-gray-400 text-xs">Secured absolute 1st position in Week 3 & Week 7 competitive algorithmic challenges.</p>
+                  </div>
+                </li>
+                <li className="flex gap-3 items-start">
+                  <span className="text-amber-500 mt-1">✦</span>
+                  <div>
+                    <strong className="text-white">Hackathon Participations</strong>
+                    <p className="text-gray-400 text-xs">Actively competed in NASA Space Apps Challenge, HackDiwas 2.0 & 3.0 (United University), Yukti 1.0 (BBS), and Zennovatio Hackathon (Chandigarh University).</p>
+                  </div>
+                </li>
+              </ul>
+            </motion.div>
+
+            {/* Right side certifications */}
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className="p-8 bg-white/5 border border-amber-500/20 rounded-2xl space-y-6"
+            >
+              <h3 className="text-xl font-royal-subheading font-bold text-amber-400 border-b border-amber-500/20 pb-2 flex items-center gap-2">
+                <FaCertificate /> Credentials & Extracurriculars
+              </h3>
+              
+              <ul className="space-y-4 font-body text-sm text-gray-300">
+                <li className="flex gap-3 items-start">
+                  <span className="text-amber-500 mt-1">✦</span>
+                  <div>
+                    <strong className="text-white">MERN Stack Development Certification [IBM]</strong>
+                    <p className="text-gray-400 text-xs">August 2024. Comprehensive training on Mongo, Express, React, and Node systems.</p>
+                  </div>
+                </li>
+                <li className="flex gap-3 items-start">
+                  <span className="text-amber-500 mt-1">✦</span>
+                  <div>
+                    <strong className="text-white">Python Programming Certification [UCER]</strong>
+                    <p className="text-gray-400 text-xs">July 2023. Core training in programming constructs, algorithms, and libraries.</p>
+                  </div>
+                </li>
+                <li className="flex gap-3 items-start">
+                  <span className="text-amber-500 mt-1">✦</span>
+                  <div>
+                    <strong className="text-white">Music & Athletics</strong>
+                    <p className="text-gray-400 text-xs">Active member of the College Music Band. Runner-up team player in the intercollege cricket tournament.</p>
+                  </div>
+                </li>
+              </ul>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* CONTACT - [SUMMON] */}
       <section id="contact" className="py-24 px-6 relative z-10">
-        <div className="max-w-3xl mx-auto bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10 shadow-[0_0_50px_rgba(34,211,238,0.05)]">
+        <div className="max-w-3xl mx-auto bg-[#180404]/80 backdrop-blur-lg rounded-2xl p-8 border border-amber-500/20 shadow-[0_0_50px_rgba(245,158,11,0.05)]">
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-white">OPEN <span className="text-cyan-500">CHANNEL</span></h2>
-            <p className="text-gray-400 text-sm font-mono mt-2">Ready to initiate collaboration?</p>
+            <h2 className="text-2xl font-royal-heading font-bold text-white">SUMMON THE <span className="text-amber-400">MAESTRO</span></h2>
+            <p className="text-gray-400 text-sm font-mono mt-2">Ready to initiate collaboration or request a project?</p>
           </div>
           <form ref={formRef} onSubmit={sendEmail} className="space-y-4">
             <div className="grid md:grid-cols-2 gap-4">
-              <input type="text" name="user_name" placeholder="IDENTIFIER (NAME)" required className="w-full bg-black/50 border border-white/10 rounded p-3 text-white focus:border-cyan-500 outline-none font-mono text-sm" />
-              <input type="email" name="user_email" placeholder="FREQUENCY (EMAIL)" required className="w-full bg-black/50 border border-white/10 rounded p-3 text-white focus:border-cyan-500 outline-none font-mono text-sm" />
+              <input type="text" name="user_name" placeholder="IDENTIFIER (NAME)" required className="w-full bg-black/50 border border-amber-500/10 rounded p-3 text-white focus:border-amber-500 outline-none font-mono text-sm" />
+              <input type="email" name="user_email" placeholder="FREQUENCY (EMAIL)" required className="w-full bg-black/50 border border-amber-500/10 rounded p-3 text-white focus:border-amber-500 outline-none font-mono text-sm" />
             </div>
-            <textarea name="message" rows="4" placeholder="TRANSMISSION DATA..." required className="w-full bg-black/50 border border-white/10 rounded p-3 text-white focus:border-cyan-500 outline-none font-mono text-sm"></textarea>
-            <button disabled={loading} className="w-full py-3 bg-cyan-600 hover:bg-cyan-500 text-black font-bold rounded font-mono transition cursor-none">
-              {loading ? "SENDING SIGNAL..." : "TRANSMIT"}
+            <textarea name="message" rows="4" placeholder="TRANSMISSION DATA..." required className="w-full bg-black/50 border border-amber-500/10 rounded p-3 text-white focus:border-amber-500 outline-none font-mono text-sm"></textarea>
+            <button disabled={loading} className="w-full py-3 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded font-mono transition cursor-none shadow-[0_0_15px_rgba(245,158,11,0.2)]">
+              {loading ? "TRANSMITTING..." : "DISPATCH SUMMONS"}
             </button>
           </form>
         </div>
       </section>
 
-      <footer className="py-8 text-center text-gray-600 text-xs font-mono border-t border-white/5 relative z-10"><p>SYSTEM STATUS: ONLINE // 2027 MANGLA SHUKLA</p></footer>
+      <footer className="py-8 text-center text-gray-600 text-xs font-mono border-t border-amber-500/10 relative z-10">
+        <p>COURT REGISTRY: ONLINE // 2027 MANGLA SHUKLA // ALL GLORY SECURED</p>
+      </footer>
     </div>
   );
 }

@@ -4,45 +4,101 @@
 
 :root {
   --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 0, 0, 0;
+  --background-start-rgb: 38, 4, 4;
+  --background-end-rgb: 10, 1, 1;
+  --font-cinzel: 'Cinzel', serif;
+  --font-playfair: 'Playfair Display', serif;
+  --font-inter: 'Inter', sans-serif;
 }
 
 html {
-  scroll-behavior: smooth; /* Makes navigation links glide */
+  scroll-behavior: smooth;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: black; /* Prevents white flash on reload */
-  overflow-x: hidden; /* Prevents horizontal scrollbar */
+  background: #0d0101; /* Rich velvet dark red-obsidian */
+  overflow-x: hidden;
+  font-family: var(--font-inter);
 }
 
-/* --- FUTURISTIC SCROLLBAR --- */
-/* Width */
+/* Custom fonts styling utilities */
+.font-royal-heading {
+  font-family: var(--font-cinzel), serif;
+  letter-spacing: 0.05em;
+}
+
+.font-royal-subheading {
+  font-family: var(--font-playfair), serif;
+}
+
+.font-body {
+  font-family: var(--font-inter), sans-serif;
+}
+
+/* --- ROYAL SCROLLBAR --- */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
-/* Track (Background) */
 ::-webkit-scrollbar-track {
-  background: #050505; 
+  background: #080101; 
 }
 
-/* Handle (The moving part) */
 ::-webkit-scrollbar-thumb {
-  background: #22d3ee; /* Cyan Color */
+  background: #b45309; /* Deep Gold/Amber */
   border-radius: 4px;
+  border: 1px solid #7f1d1d;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #06b6d4; /* Darker Cyan */
-  box-shadow: 0 0 10px #22d3ee; /* Glowing effect */
+  background: #d97706; /* Brighter Gold */
+  box-shadow: 0 0 10px #f59e0b; 
 }
 
-/* --- TEXT SELECTION (Highlighting) --- */
+/* --- ROYAL TEXT SELECTION --- */
 ::selection {
-  background: #22d3ee; /* Cyan background */
-  color: #000; /* Black text */
+  background: #7f1d1d; /* Deep Crimson */
+  color: #f59e0b; /* Bright Gold */
+}
+
+/* Custom Glow Effects */
+.royal-glow-gold {
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.4), 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+.royal-glow-red {
+  text-shadow: 0 0 10px rgba(153, 27, 27, 0.6), 0 0 20px rgba(153, 27, 27, 0.3);
+}
+
+.royal-border-gold {
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.05);
+}
+
+.royal-border-gold:hover {
+  border: 1px solid rgba(212, 175, 55, 0.6);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+}
+
+/* Background Embers/Drifting Spark Animation */
+@keyframes drift {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-10vh) translateX(100px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+.animate-drift {
+  animation: drift linear infinite;
 }
