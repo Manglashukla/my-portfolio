@@ -4,11 +4,11 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import dynamic from 'next/dynamic';
 import { 
-  FaGithub, FaLinkedin, FaEnvelope, FaBullhorn, FaTrophy, FaBuilding, FaLaptopCode, FaCertificate, FaFileDownload, FaExternalLinkAlt 
+  FaGithub, FaLinkedin, FaEnvelope, FaBullhorn, FaTrophy, FaBuilding, FaLaptopCode, FaCertificate, FaFileDownload, FaExternalLinkAlt, FaBrain
 } from 'react-icons/fa';
 import { 
   SiNextdotjs, SiTailwindcss, SiMongodb, SiExpress, SiReact, SiNodedotjs,
-  SiCplusplus, SiFirebase, SiFlutter, SiOpencv, SiPython, SiTensorflow, SiPostman, SiGit
+  SiCplusplus, SiFirebase, SiFlutter, SiOpencv, SiPython, SiTensorflow, SiPostman, SiGit, SiFastapi, SiPytorch, SiMediapipe
 } from 'react-icons/si';
 
 // --- DYNAMIC SPLINE LOADER ---
@@ -269,15 +269,21 @@ export default function Portfolio() {
     { name: "TensorFlow", icon: <SiTensorflow className="text-orange-500"/> },
     { name: "Firebase", icon: <SiFirebase className="text-yellow-500"/> },
     { name: "Git", icon: <SiGit className="text-red-500"/> },
+    { name: "FastAPI", icon: <SiFastapi className="text-teal-400"/> },
+    { name: "PyTorch", icon: <SiPytorch className="text-red-500"/> },
+    { name: "XGBoost", icon: <FaBrain className="text-blue-400"/> },
+    { name: "Llama 3", icon: <FaBrain className="text-purple-400"/> },
+    { name: "MediaPipe", icon: <SiMediapipe className="text-cyan-400"/> },
   ];
 
   const hackathonProjects = [
+    { title: "Kumbh Rakshak (Surveillance System)", desc: "Engineered an automated surveillance system to identify and track lost individuals in high-density crowds utilizing real-time camera feeds. Integrated computer vision and facial recognition models to process live video streams and match subjects against a missing persons database.", tags: ["Python", "OpenCV", "Computer Vision"], icon: "👁️", link: "https://github.com/SaumyaPratapSingh-cyber/Kumbh-Rakshak-Surveillance-System" },
     { title: "PrepXtra", desc: "A modern, advanced learning system featuring an AI-driven 3D interviewer to simulate real-world technical assessments, evaluating developer capabilities dynamically.", tags: ["Next.js", "AI Agent", "Three.js", "WebRTC"], icon: "🤖", link: "https://github.com/SaumyaPratapSingh-cyber/PrepXtra" },
-    { title: "Kumbh Rakshak", desc: "Podium-winning security and crowd safety platform designed for the Kumbh Mela. Automatically monitors real-time feeds from 1000+ security cameras using AI object tracking to find missing persons and map dense pedestrian flows.", tags: ["Computer Vision", "AI Tracking", "Node.js", "Mapbox"], icon: "👁️", link: "https://github.com/SaumyaPratapSingh-cyber/Kumbh-Rakshak-Surveillance-System" },
     { title: "Krishi Seva 2.0", desc: "Crop analysis platform integrating Machine Learning models with 85% accuracy in soil health analysis and real-time recommendation, improving yield predictions by 15% for local farmers.", tags: ["Flutter", "Firebase", "Machine Learning", "GCP"], icon: "🌱", link: "https://github.com/SaumyaPratapSingh-cyber/Krishi-Seva-App-for-to-farmers-" },
   ];
 
   const personalProjects = [
+    { title: "Smart Nagar Nigam", desc: "Engineered an autonomous civic grievance triage system that automatically captures exact GPS locations and streamlines complaint processing for municipal corporations. Implemented a MobileNetV2 Machine Learning vision model to identify problem types from uploaded photos, and an XGBoost regression model to predict the estimated days required for resolution. Integrated the Groq API (Llama 3) to automatically draft formal official complaint letters from brief citizen descriptions, reducing manual paperwork.", tags: ["Next.js", "React", "FastAPI (Python)", "PyTorch", "XGBoost", "Groq API", "MongoDB Atlas"], icon: "🏛️", link: "https://github.com/Manglashukla/Smart-Nagar-Nigam-" },
     { title: "Satyamev-Chain", desc: "Decentralized blockchain application for transparent civic data management, processing immutable records that improved local data accountability by an estimated 40% for targeted user groups.", tags: ["Blockchain", "Web3", "Full-Stack"], icon: "⛓️", link: "https://github.com/Manglashukla/Yantriq" },
     { title: "Mudra-Vani", desc: "Accessible sign language translator using computer vision, recognizing 50+ distinct gestures with low latency (<200ms per frame) to convert hand movements to text.", tags: ["Python", "OpenCV", "MediaPipe", "TensorFlow"], icon: "✋", link: "https://github.com/Manglashukla/MudraVani-AI" },
     { title: "ShoppingKart", desc: "Advanced MERN stack e-commerce platform with secure JWT authentication, Stripe payment integration, Cloudinary media hosting, and an admin analytics dashboard.", tags: ["MERN Stack", "JWT", "Stripe", "Cloudinary"], icon: "🛒", link: "https://github.com/Manglashukla/shoppingkart" }
@@ -393,8 +399,17 @@ export default function Portfolio() {
             <div className="border-2-2 absolute border-opacity-20 border-amber-500/30 h-full border" style={{ left: '50%' }}></div>
             
             <TimelineItem 
+              isLeft={false} 
+              date="Jun 2026 - Jul 2026" 
+              title="Summer Training in Artificial Intelligence using Python" 
+              company="National Institute of Electronics and Information Technology (NIELIT) (Lucknow / Online)" 
+              icon={<FaCertificate />} 
+              description="Completed an intensive 90-hour training program in Artificial Intelligence, achieving an 'S' grade (80% and above). Developed practical skills across Machine Learning, Deep Learning, and Natural Language Processing algorithms. Gained hands-on experience in basic Python programming, GUI development using Tkinter, Speech Recognition, and database connectivity." 
+            />
+
+            <TimelineItem 
               isLeft={true} 
-              date="Sep 2025 - Present" 
+              date="Sep 2025 - Apr 2026" 
               title="Campus Ambassador" 
               company="Unstop" 
               icon={<FaBullhorn />} 
